@@ -1,0 +1,40 @@
+
+<div>
+    <div class="app-heading">
+        <div class="ms-font-su ms-fontColor-themePrimary" style="float:left"> {{name}}</div>
+        <div style="clear:both"></div> 
+    </div>
+    </div>
+    <div [ngSwitch]='loading'>
+    <div *ngSwitchCase="'init'">
+        <app-loading></app-loading>
+    </div>
+    <div *ngSwitchCase="'error'">
+        <div class="app-loading">
+            <app-notify msgText="Unable to connect the back-end services !!!"></app-notify>
+        </div>
+    </div>
+    <div *ngSwitchCase="'done'">
+        <div>
+            <div style="float:left;padding:10px" *ngFor="let item of Applications">
+                
+                <div *ngIf=item.ShowInPage> 
+                    <div class="widget"> 
+                        <a href="#" target="_blank"> <img src="{{item.PictureUrl}}" /> </a>
+                    </div>  
+                </div>   
+                
+                <!--<ng-template #falsyTemplate>
+                    <h1>Do not show button</h1>
+                </ng-template> -->
+
+
+                      
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <button (click)="manageWidgets();" class="ms-Button ms-Button--primary">
+            <span class="ms-Button-label">Manage Widgets</span>
+        </button>
+    </div>
+</div>

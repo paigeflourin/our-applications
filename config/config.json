@@ -1,0 +1,15 @@
+{
+  "entries": [
+    {
+      "entry": "./lib/webparts/ourApplications/OurApplicationsWebPart.js",
+      "manifest": "./src/webparts/ourApplications/OurApplicationsWebPart.manifest.json",
+      "outputPath": "./dist/our-applications.bundle.js"
+    }
+  ],
+  "externals": {
+        "ng-office-ui-fabric": "https://cdnjs.cloudflare.com/ajax/libs/ngOfficeUiFabric/0.12.3/ngOfficeUiFabric.js"
+  },
+  "localizedResources": {
+    "ourApplicationsStrings": "webparts/ourApplications/loc/{locale}.js"
+  }
+}
