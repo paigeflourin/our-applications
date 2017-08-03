@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { AppSettings } from './shared/app.settings';
 import { IApplicationEntity } from './shared/app.entities';
 import MockHttpClient from '../MockHttpClient';
@@ -22,8 +22,10 @@ export interface ISPLists {
 
 
 @Component({
-    selector: 'widget-app',
-    templateUrl: '/src/webparts/ourApplications/app/widgets.html'  //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html' 
+    selector: 'widget-app', 
+    templateUrl: '/src/webparts/ourApplications/app/widgets.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html'
+    styleUrls: ['/src/webparts/ourApplications/app/app-style.css'], //src/webparts/ourApplications/app/
+    encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent implements OnInit {
@@ -31,7 +33,8 @@ export class AppComponent implements OnInit {
     private Applications: IApplicationEntity[] = [];
     //constructor(private appSettings: AppSettings) { }
     public loading: string = 'init';
-    
+
+
     ngOnInit() {
 
             // Local environment
@@ -52,8 +55,19 @@ export class AppComponent implements OnInit {
     }
 
     manageWidgets():void {
-        
+        this.loading = "manage";
     }
+
+    hideItem(item: any){
+        //hide item from UI then set ShowInPage column to false
+        //this.Id
+        console.log(item);
+    }
+
+    saveModChange():void {
+
+    }
+
 
     private _getMockListData(): Promise<ISPLists> {
     return MockHttpClient.get()

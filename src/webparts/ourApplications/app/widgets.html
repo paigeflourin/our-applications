@@ -22,14 +22,7 @@
                     <div class="widget"> 
                         <a href="#" target="_blank"> <img src="{{item.PictureUrl}}" /> </a>
                     </div>  
-                </div>   
-                
-                <!--<ng-template #falsyTemplate>
-                    <h1>Do not show button</h1>
-                </ng-template> -->
-
-
-                      
+                </div>                        
             </div>
             <div style="clear:both"></div>
         </div>
@@ -37,4 +30,25 @@
             <span class="ms-Button-label">Manage Widgets</span>
         </button>
     </div>
+    <div *ngSwitchCase="'manage'">
+        <div>
+            <div style="float:left;padding:10px" *ngFor="let item of Applications">
+                
+                <div *ngIf=item.ShowInPage> 
+                    <div class="widget"> 
+                        <button class="close" (click)="hideItem(item)"></button>
+                        <a href="#" target="_blank"> <img src="{{item.PictureUrl}}" /> </a>
+                    </div> 
+                  
+                </div>           
+            </div>
+            <a href="#" target="_blank"> Add Application </a> 
+            <div style="clear:both"></div>
+        </div>
+        <button (click)="saveModChange();" class="ms-Button ms-Button--primary">
+            <span class="ms-Button-label">Done</span>
+        </button>
+    </div>
+
+
 </div>
