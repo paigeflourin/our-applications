@@ -6,7 +6,7 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
-     "@angular/common": "^2.4.4",
+    "@angular/common": "^2.4.4",
     "@angular/compiler": "^2.4.4",
     "@angular/core": "^2.4.4",
     "@angular/forms": "^2.4.4",
@@ -20,13 +20,14 @@
     "@microsoft/sp-core-library": "~1.0.0",
     "@microsoft/sp-webpart-base": "~1.0.0",
     "@types/webpack-env": ">=1.12.1 <1.14.0",
+    "angular2-modal": "^3.0.1",
     "reflect-metadata": "^0.1.9",
     "rxjs": "^5.0.3",
-    "zone.js": "^0.7.6",
-    "sp-pnp-js": "^2.0.1"
+    "sp-pnp-js": "^2.0.1",
+    "zone.js": "^0.7.6"
   },
   "devDependencies": {
-  "@microsoft/sp-build-web": "~1.0.0",
+    "@microsoft/sp-build-web": "~1.0.0",
     "@microsoft/sp-module-interfaces": "~1.0.0",
     "@microsoft/sp-webpart-workbench": "~1.0.0",
     "@types/chai": "^>=3.4.34 <3.6.0",
@@ -34,8 +35,8 @@
     "gulp": "~3.9.1"
   },
   "scripts": {
-     "build": "gulp bundle",
+    "build": "gulp bundle",
     "clean": "gulp clean",
     "test": "gulp test"
   }
-} 
+}
