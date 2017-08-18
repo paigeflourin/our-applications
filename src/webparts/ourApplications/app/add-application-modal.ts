@@ -1,22 +1,75 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DialogRef, ModalComponent, CloseGuard } from 'angular2-modal';
-import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { AppSettings } from './shared/app.settings';
+import { IApplicationEntity } from './shared/app.entities';
 
 
+import MockHttpClient from '../MockHttpClient';
+import * as pnp from "sp-pnp-js";
+
+import {
+  Environment,
+  EnvironmentType
+} from '@microsoft/sp-core-library';
+import {
+  SPHttpClient,
+  SPHttpClientResponse   
+} from '@microsoft/sp-http';
+
+import 'ng-office-ui-fabric';
+
+export interface ISPLists {
+    value: IApplicationEntity[];
+}
 
 @Component({
-    selector: 'modal-app', 
-    templateUrl: '/src/webparts/ourApplications/app/add-modal.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html'
+    templateUrl: '/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', //'/src/webparts/ourApplications/app/add-modal.html', //
 })
+export class AddApplicationComponent implements OnInit {
+    private test: string = "Add Applications!";
+    private Applications: IApplicationEntity[] = [];
+    public loading: string = 'init';
 
-
-
-export class CustomModal implements OnInit {
-     private test: string = "Our Applications!";
+    constructor(private appSettings: AppSettings) {
+     }
 
     ngOnInit() {
+        
+        this.test = "opened add add"
+
+                    // Local environment
+        if (Environment.type === EnvironmentType.Local) {
+            this._getMockListData().then((response) => {
+                this.Applications = response.value;
+      
+            });
+        }
+        else if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
+            new pnp.Web(AppSettings.SHAREPOINT_SITE_URL).lists.getByTitle('OurApplications').items.get().then((result: any) => {
+                console.log(result);
+                this.Applications = result;
+
+            }).catch((e : any) => { this.loading = "error"; });
+        }
 
 
     }
-}
+
+    addItemTolist(item: any) {
+        console.log(item.id);
+    }
+
+    addItems () {
+      console.log("modal is closed");
+    }
+
+    private _getMockListData(): Promise<ISPLists> {
+    return MockHttpClient.get()
+      .then((data: IApplicationEntity[]) => {
+        var listData: ISPLists = { value: data };
+        return listData;
+      }) as Promise<ISPLists>;
+    }
+} 
+
+

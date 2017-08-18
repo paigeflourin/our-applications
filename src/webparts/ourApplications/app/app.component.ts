@@ -1,11 +1,12 @@
-import { Component, OnInit,ViewEncapsulation, ViewContainerRef } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation, ViewContainerRef, TemplateRef} from '@angular/core';
+//import { BsModalService } from 'ngx-bootstrap/modal';
+//import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { AppSettings } from './shared/app.settings';
 import { IApplicationEntity } from './shared/app.entities';
-import MockHttpClient from '../MockHttpClient';
-import { Overlay, overlayConfigFactory } from 'angular2-modal';
-import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
-import { CustomModal } from './add-application-modal';
+import { AddApplicationComponent } from './add-application-modal';
 
+
+import MockHttpClient from '../MockHttpClient';
 import * as pnp from "sp-pnp-js";
 
 import {
@@ -26,24 +27,22 @@ export interface ISPLists {
 
 @Component({
     selector: 'widget-app', 
-    templateUrl: '/src/webparts/ourApplications/app/widgets.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html'
+    templateUrl: '/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', //'/src/webparts/ourApplications/app/widgets.html', //
     //styleUrls: ['/src/webparts/ourApplications/app/app-style.css'], //src/webparts/ourApplications/app/
-    styles: ['.close { display:block;float:right;  width:30px;height:29px; background:url(http://www.htmlgoodies.com/img/registrationwelcome/close_icon.png) no-repeat center center;}'],
-    encapsulation: ViewEncapsulation.None,
-    providers: [Modal]
+    styles: ['.close { display:block;float:right;  width:30px;height:29px; background:url(https://memeburn.com/img/close_button.png) no-repeat center center;}'],
+    encapsulation: ViewEncapsulation.None
+   // providers: [Modal]
 })
+
 
 export class AppComponent implements OnInit {
     private name: string = "Our Applications!";
     private Applications: IApplicationEntity[] = [];
-    //constructor(private appSettings: AppSettings) { }
-
-
-
     public loading: string = 'init';
+    public test: string = 'test';
 
-    constructor(public modal: Modal) {
-    }
+    //bsModalRef: BsModalRef;
+    //constructor(private modalService: BsModalService) {}
 
     ngOnInit() {
 
@@ -69,18 +68,13 @@ export class AppComponent implements OnInit {
     }
 
     hideItem(item: any){
-
-        //hide item from UI then set ShowInPage column to false
-        //this.Id
         console.log(item);
 
         if (Environment.type === EnvironmentType.Local) {
             
         }
         else if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
-            let list = pnp.sp.web.lists.getByTitle("OurApplications");
-
-            list.items.getById(item.Id).update({
+             new pnp.Web(AppSettings.SHAREPOINT_SITE_URL).lists.getByTitle('OurApplications').items.getById(item.Id).update({
                 ShowInPage: false
             }).then(i => {
 
@@ -90,12 +84,17 @@ export class AppComponent implements OnInit {
         }
     }
 
-    addApp(): void {
-             return this.modal.open(CustomModal );
+    public addApp() {
+        console.log("open modal");
+/*
+        let list = ['Open a modal with component', 'Pass your data', 'Do something else', '...'];
+        this.bsModalRef = this.modalService.show(ModalContentComponent);
+        this.bsModalRef.content.title = 'Modal with component';
+        this.bsModalRef.content.list = list;*/
     }
 
     saveModChange():void {
-
+         this.ngOnInit();
     }
 
 
@@ -107,3 +106,32 @@ export class AppComponent implements OnInit {
       }) as Promise<ISPLists>;
     }
 }
+
+
+/* This is a component which we pass in modal*/
+ /*
+@Component({
+  selector: 'modal-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">{{title}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <ul *ngIf="list.length">
+        <li *ngFor="let item of list">{{item}}</li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+    </div>
+  `
+})
+
+export class ModalContentComponent {
+  public title: string;
+  public list: any[] = [];
+  constructor(public bsModalRef: BsModalRef) {}
+}*/

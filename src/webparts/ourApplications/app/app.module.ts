@@ -4,21 +4,23 @@ import { AppComponent } from './app.component';
 import { AppSettings } from './shared/app.settings';
 import { AppLoadingComponent } from './shared/loading/app.loading';
 import { AppNotifyComponent } from './shared/notify/app.notify';
-import { CustomModal } from './add-application-modal';
-import { ModalModule } from 'angular2-modal';
-import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
-
+//import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { AddApplicationComponent } from './add-application-modal';
 
 @NgModule({
-    imports: [BrowserModule, 
-        ModalModule.forRoot(),
-        BootstrapModalModule],
+    imports: [BrowserModule,
+        //ModalModule.forRoot(),
+    ], 
+    providers: [
+        AppSettings
+    ],
     declarations: [
         AppComponent, 
+        AddApplicationComponent,
         AppLoadingComponent,
         AppNotifyComponent],
     bootstrap: [AppComponent],
-    entryComponents: [CustomModal]
+    //entryComponents: [AddApplicationComponent]
 })
 
 export class AppModule {}
