@@ -23,7 +23,7 @@ export interface ISPLists {
 }
 
 @Component({
-    templateUrl: '/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', //'/src/webparts/ourApplications/app/add-modal.html', //
+    templateUrl: '/src/webparts/ourApplications/app/add-modal.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html',
 })
 export class AddApplicationComponent implements OnInit {
     private test: string = "Add Applications!";

@@ -27,7 +27,7 @@ export interface ISPLists {
 
 @Component({
     selector: 'widget-app', 
-    templateUrl: '/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', //'/src/webparts/ourApplications/app/widgets.html', //
+    templateUrl: '/src/webparts/ourApplications/app/widgets.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', 
     //styleUrls: ['/src/webparts/ourApplications/app/app-style.css'], //src/webparts/ourApplications/app/
     styles: ['.close { display:block;float:right;  width:30px;height:29px; background:url(https://memeburn.com/img/close_button.png) no-repeat center center;}'],
     encapsulation: ViewEncapsulation.None
