@@ -1,0 +1,17 @@
+<div>
+    
+    <div> {{test}}</div>
+    <div style="float:left;padding:10px" *ngFor="let item of Applications">
+        
+        <div *ngIf=!item.ShowInPage> 
+            <div class="widget" #applicationWidget> 
+                <button id="close-image"><img src="{{item.PictureUrl}}" (click)="addItemTolist(item)"></button>
+               <!-- <a href="#" target="_blank"> <img src="{{item.PictureUrl}}" /> </a>-->
+            </div> 
+            <button class="close" (click)="addItems();"> Add </button>
+        </div>           
+    </div>
+    
+    <div style="clear:both"></div>
+
+</div>

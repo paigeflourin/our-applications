@@ -4,7 +4,7 @@
   "id": "0a847cdc-0309-4af4-a025-d084e8e66554",
   "alias": "OurApplicationsWebPart",
   "componentType": "WebPart",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifestVersion": 2,
 
   "preconfiguredEntries": [{

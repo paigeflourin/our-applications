@@ -20,4 +20,8 @@ export default class MockHttpClient  {
             resolve(MockHttpClient._items);
         });
     }
+
+    public static hide() {
+            
+    }
 }

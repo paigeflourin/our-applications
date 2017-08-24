@@ -6,7 +6,11 @@
     "jsx": "react",
     "declaration": true,
     "sourceMap": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
     "types": [
         "es6-promise",
       "es6-collections",
