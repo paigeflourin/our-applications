@@ -9,6 +9,8 @@ import { AddApplicationComponent } from './add-application-modal';
 import MockHttpClient from '../MockHttpClient';
 import * as pnp from "sp-pnp-js";
 
+
+
 import {
   Environment,
   EnvironmentType
@@ -28,8 +30,8 @@ export interface ISPLists {
 @Component({
     selector: 'widget-app', 
     templateUrl: '/src/webparts/ourApplications/app/widgets.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', 
-    //styleUrls: ['/src/webparts/ourApplications/app/app-style.css'], //src/webparts/ourApplications/app/
-    styles: ['.close { display:block;float:right;  width:30px;height:29px; background:url(https://memeburn.com/img/close_button.png) no-repeat center center;}'],
+    styleUrls: ['../src/webparts/ourApplications/app/app-style.css'], //src/webparts/ourApplications/app/
+    //styles: ['.close { display:block;float:right;  width:30px;height:29px; background:url(https://memeburn.com/img/close_button.png) no-repeat center center;}'],
     encapsulation: ViewEncapsulation.None
    // providers: [Modal]
 })
@@ -40,8 +42,9 @@ export class AppComponent implements OnInit {
     private Applications: IApplicationEntity[] = [];
     public loading: string = 'init';
     public test: string = 'test';
+    public appArray: IApplicationEntity[] = [];
 
-    //bsModalRef: BsModalRef;
+    //bsModalRef: BsModalRef; 
     //constructor(private modalService: BsModalService) {}
 
     ngOnInit() {
@@ -85,16 +88,23 @@ export class AppComponent implements OnInit {
     }
 
     public addApp() {
-        console.log("open modal");
-/*
-        let list = ['Open a modal with component', 'Pass your data', 'Do something else', '...'];
-        this.bsModalRef = this.modalService.show(ModalContentComponent);
-        this.bsModalRef.content.title = 'Modal with component';
-        this.bsModalRef.content.list = list;*/
+        console.log("Update Items.ShowinPage to True and Close modal");
+
     }
 
     saveModChange():void {
          this.ngOnInit();
+    }
+
+    addRemoveApplication(value: any,event: any) {
+        if(event.target.checked){
+            this.appArray.push(value);
+        }
+        else if (!event.target.checked){
+            let indexx = this.appArray.indexOf(value);
+            this.appArray.splice(indexx,1);
+        }
+        console.log(this.appArray)
     }
 
 

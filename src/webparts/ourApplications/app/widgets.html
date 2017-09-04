@@ -3,8 +3,8 @@
         <div class="ms-font-su ms-fontColor-themePrimary" style="float:left"> {{name}}</div>
         <div style="clear:both"></div> 
     </div>
-    </div>
-    <div [ngSwitch]='loading'>
+</div>
+<div [ngSwitch]='loading'>
     <div *ngSwitchCase="'init'">
         <app-loading></app-loading>
     </div>
@@ -35,7 +35,7 @@
                 
                 <div *ngIf=item.ShowInPage> 
                     <div class="widget" #applicationWidget> 
-                        <button class="close" (click)="hideItem(item); applicationWidget.remove() "></button>
+                        <button class="close" (click)="hideItem(item); applicationWidget.remove()"></button>
                         <a href="#" target="_blank"> <img src="{{item.PictureUrl}}" /> </a>
                     </div> 
                   
@@ -44,15 +44,30 @@
          
             <div style="clear:both"></div>
         </div>
-         <button (click)="addApp();" class="ms-Button ms-Button--primary">
-            <span class="ms-Button-label">Add Application</span>
-        </button>
+        <!--<button (click)="addApp();" class="ms-Button ms-Button--primary">
+            <span class="ms-Button-label" >Add Application</span>
+        </button>-->
+        <a href="#openModal" class="ms-Button ms-Button--primary"><span class="ms-Button-label" >Add Application</span> </a>
         <button (click)="saveModChange();" class="ms-Button ms-Button--primary">
             <span class="ms-Button-label">Done</span>
         </button>
     </div>
-
-    <!-- [routerLink]="['/add']"  (click)="addApp();"  <a [routerLink]="['/add']"> -->
-
+    <div id="openModal" class="modalDialog">
+        <div>	
+            <a href="#close" title="Close" class="close-modal">X</a>
+            <p> Choose Applications to add: </p>
+             <div *ngFor="let item of Applications">
+                
+                <div *ngIf=!item.ShowInPage> 
+                    <ul class="widget"> 
+                        <li class="application-list"> <input type="checkbox" name="item.Title" value="item.Id" (change)="addRemoveApplication(item,$event)"> {{item.Title}}<br></li> 
+                    </ul>  
+                </div>                        
+            </div>
+            <button (click)="addApp();" class="ms-Button ms-Button--primary">
+                <span class="ms-Button-label" >Add</span>
+            </button>
+        </div>
+    </div>
 
 </div>
