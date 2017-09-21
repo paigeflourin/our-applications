@@ -8,7 +8,8 @@ import { AddApplicationComponent } from './add-application-modal';
 
 import MockHttpClient from '../MockHttpClient';
 import * as pnp from "sp-pnp-js";
-
+import 'ng-office-ui-fabric';
+//require('ng-office-ui-fabric');
 
 
 import {
@@ -20,7 +21,7 @@ import {
   SPHttpClientResponse   
 } from '@microsoft/sp-http';
 
-import 'ng-office-ui-fabric';
+
 
 export interface ISPLists {
     value: IApplicationEntity[];
@@ -29,8 +30,8 @@ export interface ISPLists {
 
 @Component({
     selector: 'widget-app', 
-    templateUrl: '/src/webparts/ourApplications/app/widgets.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', 
-    styleUrls: ['../src/webparts/ourApplications/app/app-style.css'], //src/webparts/ourApplications/app/
+    templateUrl: '/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', ///src/webparts/ourApplications/app/widgets.html'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', 
+    styleUrls: ['../SiteAssets/OurApplication/app/app-style.css'], //../src/webparts/ourApplications/app/app-style.css
     //styles: ['.close { display:block;float:right;  width:30px;height:29px; background:url(https://memeburn.com/img/close_button.png) no-repeat center center;}'],
     encapsulation: ViewEncapsulation.None
    // providers: [Modal]
@@ -89,7 +90,24 @@ export class AppComponent implements OnInit {
 
     public addApp() {
         console.log("Update Items.ShowinPage to True and Close modal");
+        console.log(this.appArray);
 
+        this.appArray.forEach(app =>{ 
+            if (Environment.type === EnvironmentType.Local) {
+                console.log("environment: localhost, change the display to YES ");
+                console.log(app.Title);
+            }
+            else if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
+                new pnp.Web(AppSettings.SHAREPOINT_SITE_URL).lists.getByTitle('OurApplications').items.getById(app.Id).update({
+                    ShowInPage: true
+                }).then(i => {
+                    this.loading = "manage";
+                    console.log(i);
+
+                });
+        }
+
+        });
     }
 
     saveModChange():void {

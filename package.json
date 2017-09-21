@@ -21,6 +21,7 @@
     "@microsoft/sp-webpart-base": "~1.0.0",
     "@types/webpack-env": ">=1.12.1 <1.14.0",
     "angular2-modal": "^3.0.1",
+    "ng-office-ui-fabric": "^0.15.4",
     "ng2-modal": "0.0.25",
     "ngx-bootstrap": "^1.8.1",
     "reflect-metadata": "^0.1.9",

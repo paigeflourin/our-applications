@@ -16,6 +16,7 @@ import {
   SPHttpClientResponse   
 } from '@microsoft/sp-http';
 
+//require('ng-office-ui-fabric');
 import 'ng-office-ui-fabric';
 
 export interface ISPLists {
@@ -23,7 +24,7 @@ export interface ISPLists {
 }
 
 @Component({
-    templateUrl: '/src/webparts/ourApplications/app/add-modal.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html',
+    templateUrl: '/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/add-modal.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html',
 })
 export class AddApplicationComponent implements OnInit {
     private test: string = "Add Applications!";

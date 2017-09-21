@@ -1,4 +1,4 @@
-.close { display:block;float:right;  width:30px;height:29px; background:url(https://memeburn.com/img/close_button.png) no-repeat center center;}
+.close { display:block;float:right;  width:20px;height:20px; background:url(https://cupdev.sharepoint.com/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/closeicon.png) no-repeat center center;} /*/src/webparts/ourApplications/static/closeicon.png*/
 
 .application-list {
     list-style-type: none;
@@ -54,4 +54,44 @@
 }
 .close-modal:hover {
     background: #00d9ff;
+}
+
+a.ms-Button-label {color:#ffffff;}      /* unvisited link */
+a.ms-Button-label:visited {color:#ffffff}  /* visited link */
+a.ms-Button-label:hover {color:#ffffff;}  /* mouse over link */
+a.ms-Button-label:active {color:#ffffff;}  /* selected link */
+
+/*Style for Buttons because office fabric ui is not working*/
+.ms-Button.ms-Button--primary {
+    outline: transparent;
+    position: relative;
+}
+
+.ms-Button.ms-Button--primary {
+    min-width: 80px;
+    background-color: #0078d7;
+    border-color: #0078d7;
+    color: #ffffff;
+}
+
+.ms-Button {
+    outline: transparent;
+    position: relative;
+}
+
+.ms-Button {
+    font-family: "Segoe UI WestEuropean","Segoe UI","Helvetica Neue",sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    font-weight: 400;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-width: 0;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 16px;
 }

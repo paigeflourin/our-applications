@@ -1,5 +1,5 @@
 export interface IApplicationEntity {
-    Id: string;
+    Id: number;
     Title: string;
     PictureUrl: string;
     ShowInPage: boolean;
