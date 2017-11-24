@@ -10,7 +10,7 @@ import styles from './OurApplications.module.scss';
 import * as strings from 'ourApplicationsStrings';
 import { IOurApplicationsWebPartProps } from './IOurApplicationsWebPartProps';
 import 'reflect-metadata';
-
+import pnp from "sp-pnp-js";
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 require('zone.js');
@@ -25,6 +25,21 @@ import {
 
 
 export default class OurApplicationsWebPart extends BaseClientSideWebPart<IOurApplicationsWebPartProps> {
+
+
+  public onInit(): Promise<void> {
+    
+      return super.onInit().then(_ => {
+    
+        pnp.setup({
+          spfxContext: this.context,
+          headers: {
+            Accept: 'application/json; odata=verbose'
+          }
+        });
+        
+      });
+  }
 
   public render(): void {
     this.domElement.innerHTML = '<widget-app> </widget-app>';

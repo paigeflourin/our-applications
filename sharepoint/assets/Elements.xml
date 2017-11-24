@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+
+       <Field ID="{1867AB58-E701-4A85-913B-FBFCC7448C6D}"
+            Name="PictureUrl"
+            DisplayName="PictureUrl"
+            Type="Text"
+            Group="OurApps"
+            Required="FALSE"/>
+
+      <Field ID="{7DD755FF-7FB7-4D95-A81D-C9B503985360}"
+            Name="ShowInPage"
+            DisplayName="ShowInPage"
+            Type="Boolean"
+            Group="OurApps"
+            Required="FALSE"> </Field>
+
+
+        <Field ID="{3547A3A1-72FA-46CD-8B18-A360B25B6C48}"
+            Name="AppUrl"
+            DisplayName="AppUrl"
+            Type="Text"
+            Group="OurApps"
+            Required="False"> </Field>
+    
+    <!--<ContentType ID="0x010100FA0963FA69A646AA916D2E41284FC9D1" 
+            Name="OurApplicationsContentType" 
+            Group="Our Application Content Types" 
+            Description="This is the Content Type for Our Applications">
+        <FieldRefs>
+            <FieldRef ID="{1867AB58-E701-4A85-913B-FBFCC7448C6D}" /> 
+            <FieldRef ID="{7DD755FF-7FB7-4D95-A81D-C9B503985360}" />
+            <FieldRef ID="{3547A3A1-72FA-46CD-8B18-A360B25B6C48}" /> 
+        </FieldRefs>
+    </ContentType> -->
+
+    <ListInstance 
+            CustomSchema="Schema.xml"
+            FeatureId="00bfea71-de22-43b2-a848-c05709900100"
+            Title="OurApplications" 
+            Description="OurApplications List created using SharePoint Framework"
+            TemplateType="100"
+            Url="Lists/OurApplications">  
+    </ListInstance>
+
+</Elements>

@@ -1,4 +1,4 @@
-.close { display:block;float:right;  width:20px;height:20px; background:url(https://cupdev.sharepoint.com/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/closeicon.png) no-repeat center center;} /*/src/webparts/ourApplications/static/closeicon.png*/
+.close { display:block;float:right;  width:20px;height:20px; background:url(https://cupdev.sharepoint.com/sites/DevIntranet/SiteAssets/TeamApplications/closeicon.png) no-repeat center center;} /*/src/webparts/ourApplications/static/closeicon.png*/
 
 .application-list {
     list-style-type: none;
