@@ -31,9 +31,8 @@ export interface ISPLists {
 
 @Component({
     selector: 'widget-app', 
-    templateUrl: '/sites/DevIntranet/SiteAssets/TeamApplications/app/widgets.html', ///src/webparts/ourApplications/app/widgets.html'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', 
-    styleUrls: [ 'https://cupdev.sharepoint.com/sites/DevIntranet/SiteAssets/OurApplication/app/app-style.css' ], //../SiteAssets/OurApplication/app/app-style.css ~~~ ../src/webparts/ourApplications/app/app-style.css
-    styles: ['.close { display:block;float:right;  width:20px;height:20px; background:url(https://cupdev.sharepoint.com/sites/DevIntranet/SiteAssets/TeamApplications/closeicon.png) no-repeat center center;} /*/src/webparts/ourApplications/static/closeicon.png*/'],
+    templateUrl: 'https://campress.sharepoint.com/TeamApplications/app/widgets.html', ///src/webparts/ourApplications/app/widgets.html'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', 
+    //styleUrls: [ 'https://campress.sharepoint.com/TeamApplications/app/app-style.css' ], //../SiteAssets/OurApplication/app/app-style.css ~~~ ../src/webparts/ourApplications/app/app-style.css
     encapsulation: ViewEncapsulation.None
    // providers: [Modal]
 })
@@ -55,74 +54,34 @@ export class AppComponent implements OnInit {
         if (Environment.type === EnvironmentType.Local) {
             this._getMockListData().then((response) => {
                 this.Applications = response.value;
-                this.loading = "done";
+                this.loading = 'done';
             });
         }
         else if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
-             
-                let listEnsureResults: ListEnsureResult;
-
-                //Check if list exist
-                //pnp.sp.web.lists.ensure("OurApplications").then((ler: ListEnsureResult) => {
-                //    listEnsureResults = ler;
-                    
-                //    if (!ler.created) {
-                    pnp.sp.web.lists.filter("Title eq OurApplications").get().then(function(result) 
+                    let that = this;
+                    pnp.sp.web.lists.filter("Title eq 'OurApplications'").get().then(function(result) 
                     {
-                        
-                       
+
+                        console.log(that);
                         if (result.length > 0) {
                             console.log("list exists");
                             pnp.sp.web.lists.getByTitle("OurApplications").items.get().then((response) => {
+                             
                                 console.log("data returned: first call");
                                 console.log(response);
-                                this.Applications = response;
-                                this.loading = "done";
-        
-                            }).catch((e: any) => {this.loading = "error"});
+                                
+                                that.Applications = response;
+                               
+                                console.log(that.Applications);
+                                that.loading = 'done';
+
+                                
+                            }).catch((e: any) => {that.loading = 'error'});
                          } else {
                             console.log("list doesnt exists");
                          }
-
-                    });    
-                  //  }
-                  //  else {
-
-                        
-                        //console.log(listEnsureResults);
-                        //var fieldXML = "<Field DisplayName='ShowInPage' Type='Boolean' Required='FALSE' Name='ShowInPage' />";
-                        //pnp.sp.web.lists.getByTitle("OurApplications").fields.createFieldAsXml(fieldXML).then(function(result) {});
-                        //pnp.sp.web.lists.getByTitle("OurApplications").fields.addText('AppUrl').then(function(r) { });  
-                        //ler.list.fields.addText("AppUrl");
-                    //    return ler.list;
-                        //return ler.list.fields.addText("PictureUrl"); 
-                       // pnp.sp.web.lists.getByTitle("OurApplications").fields.addText('Testing Field');
-
-                        //Create one if it doesnt exist
                          
-                         //param 1 - List Title
-                         //param 2 - List description
-                         //param 3 - List Template ID
-                         //param 4 - boolean value for enable or disable content types to list
-                         //param 5 - optional, we can pass additional settings for the list
-                         //pnp.sp.web.lists.add('OurApplications', 'Description for OurApplications list', 100, false).then(function(result) {
-                            // if (result.data.Created){
-                                 //console.log('List Created Successfully!');
-                                 //pnp.sp.web.lists.getByTitle("OurApplications").fields.addText('PictureUrl').then(function(r) { });  
-                                 
-                            // }
-                        // });
-                   // }
-                //});
-            
-              
-
-           
-            /*new pnp.Web(AppSettings.SHAREPOINT_SITE_URL).lists.getByTitle('OurApplications').items.get().then((result: any) => {
-                console.log(result);
-                this.Applications = result;
-                this.loading = "done";
-            }).catch((e : any) => { this.loading = "error"; });*/
+                    });    
         }
 
     }
@@ -144,7 +103,7 @@ export class AppComponent implements OnInit {
                 console.log(i);
             });*/
             pnp.sp.web.lists.getByTitle("OurApplications").items.getById(item.Id).update({
-                ShowInPage : false
+                ShowInPage : "No"
             }).then( i => {
                 console.log(i);
             })
@@ -164,7 +123,7 @@ export class AppComponent implements OnInit {
             else if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
                
                 pnp.sp.web.lists.getByTitle("OurApplications").items.getById(app.Id).update({
-                    ShowInPage : true
+                    ShowInPage : "Yes"
                 }).then( i => {
                     this.loading = "manage";
                     console.log(i);

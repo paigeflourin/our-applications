@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     template:`
     <div>
         <div class="app-loading">
-            <img src="/sites/DevIntranet/SiteAssets/TeamApplications/squares.gif" width="60" alt="Loading..."><br> &nbsp;&nbsp; Loading Components...
+            <img src="https://campress.sharepoint.com/TeamApplications/squares.gif" width="60" alt="Loading..."><br> &nbsp;&nbsp; Loading Components...
         </div>
     </div>`
 })

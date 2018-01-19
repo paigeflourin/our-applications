@@ -1,8 +1,8 @@
 ﻿#################
 # Configuration #
 #################
-$cdnSite = "https://cupdev.sharepoint.com/sites/DevIntranet/" # => CDN SharePoint site
-$cdnLib = "SiteAssets/TeamApplications" # => Document library and eventual folders
+$cdnSite = "https://campress.sharepoint.com/" # => CDN SharePoint site
+$cdnLib = "/TeamApplications" # => Document library and eventual folders
 #######
 # End #
 #######

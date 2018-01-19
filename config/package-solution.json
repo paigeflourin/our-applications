@@ -2,10 +2,28 @@
   "solution": {
     "name": "our-applications-client-side-solution",
     "id": "c23661a1-50a2-4b69-b8f2-9b7a7a5db2b1",
-    "version": "1.0.0.12"
-    
-
-    
+    "version": "1.0.2.16",
+    "features": [
+      {
+        "id": "49280240-2932-4868-b668-19361475ac9b",
+        "title": "Our Applications Web part feature",
+        "description": "A feature which activates the Client-Side WebPart named Our",
+        "version": "1.0.2.15"
+      },
+      {
+      "title": "our-applications-client-side-solution",
+      "description": "our-applications-client-side-solution",
+      "id": "523fe887-ced5-4036-b564-8dad5c6c6e24",
+      "version": "1.0.2.15",
+      "assets": {
+        "elementManifests": [
+          "elements.xml"
+        ],
+        "elementFiles":[
+          "schema.xml"
+        ]
+      }
+    }]
   },
   "paths": {
     "zippedPackage": "solution/our-applications.sppkg"

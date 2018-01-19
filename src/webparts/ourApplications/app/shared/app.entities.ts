@@ -2,6 +2,6 @@ export interface IApplicationEntity {
     Id: number;
     Title: string;
     PictureUrl: string;
-    ShowInPage: boolean;
+    ShowInPage: string;
     AppUrl: string;
 }

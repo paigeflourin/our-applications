@@ -24,7 +24,7 @@ export interface ISPLists {
 }
 
 @Component({
-    templateUrl: '/sites/DevIntranet/SiteAssets/TeamApplications/app/add-modal.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html',
+    templateUrl: 'https://campress.sharepoint.com/TeamApplications/app/add-modal.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html',
 })
 export class AddApplicationComponent implements OnInit {
     private test: string = "Add Applications!";

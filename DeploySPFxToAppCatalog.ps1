@@ -1,7 +1,7 @@
 #################
 # Configuration #
 #################
-$catalogSite = "https://cupdev.sharepoint.com/sites/AppCatalog/" # => App Catalog site
+$catalogSite = "https://campress.sharepoint.com/sites/appcatalog" # => App Catalog site
 $catalogRelativePath = "sites/AppCatalog/AppCatalog" # => App Catalog relative url
 #######
 # End #
@@ -60,7 +60,7 @@ Write-Host * The SPFx solution has been succesfully uploaded to the AppCatalog *
 Write-Host *************************************************** -ForegroundColor Yellow
 
 # Connect to SharePoint Online
-$targetSite = "https://cupdev.sharepoint.com/sites/AppCatalog"
+$targetSite = "https://campress.sharepoint.com/sites/appcatalog"
 $targetSiteUri = [System.Uri]$targetSite
  
 # Retrieve the client credentials and the related Authentication Cookies
