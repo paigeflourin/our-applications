@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+
+   <Field ID="{060E50AC-E9C1-4D3C-B1F9-DE0BCAC300F6}"
+           Name="PictureUrl"
+           DisplayName="PictureUrl"
+           Type="Text"
+           Required="FALSE"
+           Group="Team Apps Columns" />
+
+    <Field ID="{68AE5980-0A4C-4BB0-AC90-A0D18AFD6C7D}"  
+            Name="ShowInPage" 
+            DisplayName="ShowInPage Yes or No Only "
+            Type="Text"
+           Required="FALSE"
+           Group="Team Apps Columns" />
+
+    <Field ID="{64732C35-22DE-438B-BEA6-4FA14196032A}"
+           Name="AppUrl"
+           DisplayName="AppUrl"
+           Type="Text"
+           Required="FALSE"
+           Group="Team Apps Columns" />
+   
+
+   <ContentType ID="0x010042D0C1C200A14B6887742B6344675C8B" 
+           Name="Team Applications" 
+           Group="Team Apps Content Types" 
+           Description="">
+       <FieldRefs>
+           <FieldRef ID="{060E50AC-E9C1-4D3C-B1F9-DE0BCAC300F6}" /> 
+           <FieldRef ID="{68AE5980-0A4C-4BB0-AC90-A0D18AFD6C7D}" />
+           <FieldRef ID="{64732C35-22DE-438B-BEA6-4FA14196032A}" />
+       </FieldRefs>
+   </ContentType> 
+
+   <ListInstance 
+           CustomSchema="schema.xml"
+           FeatureId="00bfea71-de22-43b2-a848-c05709900100"
+           Title="OurApplications" 
+           Description="OurApplications List"
+           TemplateType="100"
+           Url="Lists/OurApplications">
+   </ListInstance>
+
+</Elements>

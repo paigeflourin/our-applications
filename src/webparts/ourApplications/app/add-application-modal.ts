@@ -16,6 +16,7 @@ import {
   SPHttpClientResponse   
 } from '@microsoft/sp-http';
 
+//require('ng-office-ui-fabric');
 import 'ng-office-ui-fabric';
 
 export interface ISPLists {
@@ -23,7 +24,7 @@ export interface ISPLists {
 }
 
 @Component({
-    templateUrl: '/src/webparts/ourApplications/app/add-modal.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html',
+    templateUrl: 'https://campress.sharepoint.com/TeamApplications/app/add-modal.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html',
 })
 export class AddApplicationComponent implements OnInit {
     private test: string = "Add Applications!";
@@ -45,11 +46,17 @@ export class AddApplicationComponent implements OnInit {
             });
         }
         else if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
-            new pnp.Web(AppSettings.SHAREPOINT_SITE_URL).lists.getByTitle('OurApplications').items.get().then((result: any) => {
+            /*new pnp.Web(AppSettings.SHAREPOINT_SITE_URL).lists.getByTitle('OurApplications').items.get().then((result: any) => {
                 console.log(result);
                 this.Applications = result;
 
-            }).catch((e : any) => { this.loading = "error"; });
+            }).catch((e : any) => { this.loading = "error"; });*/
+
+            pnp.sp.web.lists.getByTitle("OurApplications").items.get().then((response) => {
+                console.log(response);
+                this.Applications = response;
+
+            }).catch((e: any) => {this.loading = "error"});
         }
 
 

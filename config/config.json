@@ -7,7 +7,7 @@
     }
   ],
   "externals": {
-  
+
   },
   "localizedResources": {
     "ourApplicationsStrings": "webparts/ourApplications/loc/{locale}.js"

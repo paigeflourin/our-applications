@@ -7,8 +7,12 @@ import { AddApplicationComponent } from './add-application-modal';
 
 
 import MockHttpClient from '../MockHttpClient';
-import * as pnp from "sp-pnp-js";
+//import * as pnp from "sp-pnp-js";
+import pnp, { Web, List, ListEnsureResult } from "sp-pnp-js";
+import 'ng-office-ui-fabric';
+//require('ng-office-ui-fabric');
 
+import 'app-style.css';
 import {
   Environment,
   EnvironmentType
@@ -18,7 +22,7 @@ import {
   SPHttpClientResponse   
 } from '@microsoft/sp-http';
 
-import 'ng-office-ui-fabric';
+
 
 export interface ISPLists {
     value: IApplicationEntity[];
@@ -27,9 +31,8 @@ export interface ISPLists {
 
 @Component({
     selector: 'widget-app', 
-    templateUrl: '/src/webparts/ourApplications/app/widgets.html', //'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', 
-    //styleUrls: ['/src/webparts/ourApplications/app/app-style.css'], //src/webparts/ourApplications/app/
-    styles: ['.close { display:block;float:right;  width:30px;height:29px; background:url(https://memeburn.com/img/close_button.png) no-repeat center center;}'],
+    templateUrl: 'https://campress.sharepoint.com/TeamApplications/app/widgets.html', ///src/webparts/ourApplications/app/widgets.html'/sites/DevIntranet/BPTBranding/SiteAssets/OurApplication/app/widgets.html', 
+    //styleUrls: [ 'https://campress.sharepoint.com/TeamApplications/app/app-style.css' ], //../SiteAssets/OurApplication/app/app-style.css ~~~ ../src/webparts/ourApplications/app/app-style.css
     encapsulation: ViewEncapsulation.None
    // providers: [Modal]
 })
@@ -40,25 +43,45 @@ export class AppComponent implements OnInit {
     private Applications: IApplicationEntity[] = [];
     public loading: string = 'init';
     public test: string = 'test';
-
-    //bsModalRef: BsModalRef;
+    public appArray: IApplicationEntity[] = [];
+    
+    //bsModalRef: BsModalRef; 
     //constructor(private modalService: BsModalService) {}
-
-    ngOnInit() {
-
+    
+    ngOnInit(): void {
+        
             // Local environment
         if (Environment.type === EnvironmentType.Local) {
             this._getMockListData().then((response) => {
                 this.Applications = response.value;
-                this.loading = "done";
+                this.loading = 'done';
             });
         }
         else if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
-            new pnp.Web(AppSettings.SHAREPOINT_SITE_URL).lists.getByTitle('OurApplications').items.get().then((result: any) => {
-                console.log(result);
-                this.Applications = result;
-                this.loading = "done";
-            }).catch((e : any) => { this.loading = "error"; });
+                    let that = this;
+                    pnp.sp.web.lists.filter("Title eq 'OurApplications'").get().then(function(result) 
+                    {
+
+                        console.log(that);
+                        if (result.length > 0) {
+                            console.log("list exists");
+                            pnp.sp.web.lists.getByTitle("OurApplications").items.get().then((response) => {
+                             
+                                console.log("data returned: first call");
+                                console.log(response);
+                                
+                                that.Applications = response;
+                               
+                                console.log(that.Applications);
+                                that.loading = 'done';
+
+                                
+                            }).catch((e: any) => {that.loading = 'error'});
+                         } else {
+                            console.log("list doesnt exists");
+                         }
+                         
+                    });    
         }
 
     }
@@ -74,27 +97,63 @@ export class AppComponent implements OnInit {
             
         }
         else if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
-             new pnp.Web(AppSettings.SHAREPOINT_SITE_URL).lists.getByTitle('OurApplications').items.getById(item.Id).update({
+            /*new pnp.Web(AppSettings.SHAREPOINT_SITE_URL).lists.getByTitle('OurApplications').items.getById(item.Id).update({
                 ShowInPage: false
             }).then(i => {
-
                 console.log(i);
+            });*/
+            pnp.sp.web.lists.getByTitle("OurApplications").items.getById(item.Id).update({
+                ShowInPage : "No"
+            }).then( i => {
+                console.log(i);
+            })
 
-            });
         }
     }
 
     public addApp() {
-        console.log("open modal");
-/*
-        let list = ['Open a modal with component', 'Pass your data', 'Do something else', '...'];
-        this.bsModalRef = this.modalService.show(ModalContentComponent);
-        this.bsModalRef.content.title = 'Modal with component';
-        this.bsModalRef.content.list = list;*/
+        console.log("Update Items.ShowInPage to True and Close modal");
+        console.log(this.appArray);
+
+        this.appArray.forEach(app =>{ 
+            if (Environment.type === EnvironmentType.Local) {
+                console.log("environment: localhost, change the display to YES ");
+                console.log(app.Title);
+            }
+            else if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
+               
+                pnp.sp.web.lists.getByTitle("OurApplications").items.getById(app.Id).update({
+                    ShowInPage : "Yes"
+                }).then( i => {
+                    this.loading = "manage";
+                    console.log(i);
+                })
+                
+                /* new pnp.Web(AppSettings.SHAREPOINT_SITE_URL).lists.getByTitle('OurApplications').items.getById(app.Id).update({
+                    ShowInPage: true
+                }).then(i => {
+                    this.loading = "manage";
+                    console.log(i);
+
+                });*/
+        }
+
+        });
     }
 
     saveModChange():void {
          this.ngOnInit();
+    }
+
+    addRemoveApplication(value: any,event: any) {
+        if(event.target.checked){
+            this.appArray.push(value);
+        }
+        else if (!event.target.checked){
+            let indexx = this.appArray.indexOf(value);
+            this.appArray.splice(indexx,1);
+        }
+        console.log(this.appArray)
     }
 
 
